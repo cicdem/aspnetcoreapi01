@@ -5,6 +5,9 @@ services:
 before_install:
     - docker build -t cicdem/aspnetcoreapi .
 
+script:
+    - echo 'test'
+
 deploy:
     provider: elasticbeanstalk
     region: "eu-west-1"
