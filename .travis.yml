@@ -1,0 +1,21 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t cicdem/aspnetcoreapi-react .
+
+script:
+    - docker run -e CI=true cicdem/aspnetcoreapi-react
+
+deploy:
+    provider: elasticbeanstalk
+    region: "eu-west-1"
+    app: "aspnetcoreapi"
+    env: "Aspnetcoreapi-env"
+    bucket_name: "elasticbeanstalk-eu-west-1-665873165779"
+    bucket_path: "aspnetcoreapi"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: "$AWS_SECRET_KEY"
